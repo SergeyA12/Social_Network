@@ -1,0 +1,87 @@
+.gradient-custom-3 {
+    /* fallback for old browsers */
+    background: #84fab0;
+  
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5));
+  
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5))
+  }
+  
+  .gradient-custom-4 {
+    /* fallback for old browsers */
+    background: #84fab0;
+  
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1));
+  
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1))
+  } 
+
+
+  nav{
+    display: flex;
+    gap:20px;
+    background: black;
+    padding: 20px;
+  }
+
+  nav a{
+    color: white;
+    text-decoration: none;
+    transition: 0.4s;
+  }
+  
+  nav a:hover, nav button:hover{
+    color: hotpink;
+  }
+  nav button{
+    border: none;
+    background: none;
+    color: white;
+    cursor: pointer;
+    transition: 0.4s;
+  }
+
+  a.active{
+    background: mediumpurple;
+    padding: 5px 10px;
+  }
+  .gradient-custom-2 {
+    /* fallback for old browsers */
+    background: #fbc2eb;
+    
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, rgba(251, 194, 235, 1), rgba(166, 193, 238, 1));
+    
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, rgba(251, 194, 235, 1), rgba(166, 193, 238, 1))
+    }
+    .list{
+      display: flex;
+      padding: 20px;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .list img{
+      width: 150px;
+      height: 150px;
+      border-radius: 4px;
+      object-fit: cover;
+    }
+
+    summary {
+      display: inline-block;
+      padding: 16px 32px;
+      border-radius: 16px;
+      background: radial-gradient(circle 12px, white 100%, transparent calc(100% + 1px)) #ccc -16px;
+      transition: 0.3s ease-in-out;
+    }
+    
+    details[open] summary {
+      background-color: dodgerBlue;
+      background-position: 16px;
+    }

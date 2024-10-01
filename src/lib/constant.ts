@@ -1,0 +1,3 @@
+export const DEFAULT_PIC = "https://static.vecteezy.com/system/resources/previews/042/332/096/non_2x/default-avatar-profile-icon-profile-placeholder-anonymous-user-male-no-photo-web-template-default-user-picture-for-social-networks-resume-forums-and-dating-sites-grey-photo-placeholder-free-vector.jpg"
+export const BASE_URL = "http://localhost:4002/"
+export const DEFAULT_COVER = "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/A_black_image.jpg/640px-A_black_image.jpg"
