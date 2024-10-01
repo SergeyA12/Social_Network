@@ -12,7 +12,7 @@ import {
 import { Link } from 'react-router-dom';
 import { InputUser } from '../../lib/types';
 import { handleSignup } from '../../lib/api';
-import { useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form';
 
 
 export function Signup() {

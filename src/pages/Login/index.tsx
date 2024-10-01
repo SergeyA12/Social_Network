@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useForm } from 'react-hook-form'
 import {
     MDBContainer,
     MDBCard,
@@ -12,7 +13,7 @@ import {
 import { Link } from 'react-router-dom';
 import { ILoginedUser } from '../../lib/types';
 import { handleLogin } from '../../lib/api';
-import { useForm } from 'react-hook-form'
+
 import { useNavigate } from 'react-router-dom';
 
 export function Login() {
