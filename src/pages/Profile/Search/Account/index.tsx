@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { IAccount } from '../../../../lib/types';
-import { handleAccountbyId } from '../../../../lib/api';
+import { handleAccountbyId, handleCancelRequest, handleSendFollow, handleUnfollow } from '../../../../lib/api';
 import { BASE_URL, DEFAULT_COVER, DEFAULT_PIC } from '../../../../lib/constant';
 import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBBtn, MDBCardImage, MDBTypography, MDBCardBody } from 'mdb-react-ui-kit';
 import { Gallery } from '../../../../components/Gallery';
@@ -10,15 +10,87 @@ import { Gallery } from '../../../../components/Gallery';
 export const Account = () => {
     const { id } = useParams<{ id: string }>();
     const [user, setUser] = useState<IAccount | null>(null);
+    const [error,setError] = useState('')
+    const navigate = useNavigate()
 
     useEffect(() => {
         handleAccountbyId(id as string)
             .then(response => {
+              if(!response.status){
+                  navigate("/profile")
+              }
                 setUser(response.payload as IAccount)
             })
     }, [id])
 
+    const handleRequest = ()=> {
+      if(user){
+        if(user.connection.following){
+          unFollowUser()
+        }else if(user.connection.requested){
+          cancelRequest()
+        }else{
+          followUser()
+        }
+      }else{
+        setError(error)
+      }
+    }
+
+
+    const unFollowUser = ()=> {
+        if(user && user.id){
+          handleUnfollow(user.id)
+          .then(response=>{
+            if(response.status == 'unfollowed'){
+              setUser({
+                ...user,
+                connection:{...user.connection,following:false}
+              })
+            }
+            
+          })
+        }
+    }
+
+    const cancelRequest =()=> {
+        if(user && user.id){
+          handleCancelRequest(user.id)
+          .then(response=>{
+            if(response.status == 'cancelled'){
+              setUser({
+                ...user,
+                connection:{...user.connection,requested:false}
+              })
+            }
+            
+          })
+        }
+    }
+
+    const followUser = ()=>{
+      if(user && user.id){
+          handleSendFollow(user.id)
+          .then(response=>{
+              if(response.status == 'following'){
+                  setUser({
+                      ...user,
+                      connection:{...user.connection, following:true}
+                  })
+              } else if(response.status == 'requested'){
+                  setUser({
+                      ...user,
+                      connection:{...user.connection, requested:true}
+                  })
+              }
+              
+          })
+      }
+      
+  }
+
     return (
+      
         <div className="gradient-custom-2" style={{ backgroundColor: '#9DE2FF' }}>
           <MDBContainer className="py-5 h-100">
             <MDBRow className="justify-content-center align-items-center h-100">
@@ -70,14 +142,34 @@ export const Account = () => {
                                 src="https://cdn.iconscout.com/icon/premium/png-256-thumb/private-profile-2426657-2047064.png"
                                 style={{ cursor: 'pointer', height: 60, width: 60 }} 
                             />
-                            <MDBBtn 
-                                color="primary" 
-                                style={{ marginLeft: '10px', height: '35px' }} >
-                                Following
-                            </MDBBtn>
+                                    <button onClick={handleRequest} className='btn btn-info'>
+                                        {
+                                            user.connection.following ?
+                                            "UNFOLLOW" : 
+                                            user.connection.followsMe ?
+                                            "FOLLOW BACK" :
+                                            user.connection.requested ?
+                                            "CANCEL REQUEST" :
+                                            "FOLLOW"
+                                        }
+                                    </button>
                      </div>
                     </div>
-                ):null}
+                ): <div className="p-4 text-black" >
+                <div className="d-flex justify-content-end text-center py-1">
+                            <button onClick={handleRequest} className='btn btn-info'>
+                                {
+                                    user?.connection.following ?
+                                    "UNFOLLOW" : 
+                                    user?.connection.followsMe ?
+                                    "FOLLOW BACK" :
+                                    user?.connection.requested ?
+                                    "CANCEL REQUEST" :
+                                    "FOLLOW"
+                                }
+                            </button>
+             </div>
+            </div>}
 
                 {!user?.isPrivate && (
                     <div className="p-4 text-black" style={{ backgroundColor: '#F8F9FA' }}>

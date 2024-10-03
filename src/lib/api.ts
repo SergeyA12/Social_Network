@@ -70,4 +70,33 @@ export const handleAccountbyId = async(id:string):Promise<IResponse>=>{
     const response = await Axios.get(`/account/${id}`)
     return response.data
 }
-    
+
+export const handleSendFollow = async (id:string):Promise<IResponse>=>{
+    const response = await Axios.post('/account/follow/' +id)
+    return response.data
+}
+
+export const handleUnfollow = async(id:string):Promise<IResponse>=>{
+    const response = await Axios.post('/account/unfollow/'+id)
+    return response.data
+}
+
+export const handleCancelRequest = async(id:string):Promise<IResponse>=>{
+    const response = await Axios.delete('/request/cancel/'+ id)
+    return response.data
+}
+
+export const handleRequests = async():Promise<IResponse>=>{
+    const response = await Axios.get('/requests')
+    return response.data
+}    
+
+export const handleRequestsAccept = async(id:string):Promise<IResponse>=>{
+    const response = await Axios.patch('/requests/accept/'+id)
+    return response.data
+}
+
+export const handleRequestsDecline = async(id:string):Promise<IResponse>=>{
+    const response = await Axios.patch('/requests/decline/'+id)
+    return response.data
+}

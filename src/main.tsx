@@ -12,6 +12,7 @@ import { Followers } from './pages/Profile/Followers'
 import { Followings } from './pages/Profile/Followings'
 import { Search } from './pages/Profile/Search'
 import { Account } from './pages/Profile/Search/Account'
+import { Request } from './pages/Profile/Requests'
 
 const routes = createBrowserRouter([
   {
@@ -53,6 +54,10 @@ const routes = createBrowserRouter([
       {
         path:':id',
         element:<Account/>
+      },
+      {
+        path:'requests',
+        element:<Request/>
       }
     ]
   }

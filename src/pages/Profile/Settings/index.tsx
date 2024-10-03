@@ -22,6 +22,8 @@ export function Settings() {
     const [showisPrivateForm, setShowisPrivateForm] = useState(false);
     const { register, handleSubmit, reset, formState: { errors } } = useForm<IUser>();
     const navigate = useNavigate();
+
+    
     const onSubmitPassword = (data: { old: string, newpwd: string }) => {
         handleChangePassword(data)
             .then(response => {

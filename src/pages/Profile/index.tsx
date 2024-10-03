@@ -10,7 +10,6 @@ export const Profile = ()=>{
     useEffect(()=>{
         handleVeryfy()
         .then(response=>{
-            console.log(response);
             
             if(!response.user){
                 navigate('/login')
@@ -32,6 +31,7 @@ export const Profile = ()=>{
             <NavLink to="/profile/followers">Followers</NavLink>
             <NavLink to="/profile/followings">Followings</NavLink>
             <NavLink to="/profile/settings">Settings</NavLink>
+            {account.isPrivate == true ? <NavLink to="/profile/requests">Requests</NavLink>:null}
             <button onClick={logout}>Logout</button>
         </nav>
         <Outlet

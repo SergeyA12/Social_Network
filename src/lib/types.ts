@@ -60,5 +60,19 @@ export interface IAccount extends IUser{
     payload:IUser | null
     followers:[]
     following:[]
-    posts:IPost[]
+    posts?:IPost[]
+
+    available:boolean
+    connection:{
+      blockedMe:boolean
+      didIBlock:boolean
+      following:boolean
+      followsMe:boolean
+      requested:boolean
+    }
+}
+
+export interface IRequestUser{
+    id:string,
+    user:IUser
 }
